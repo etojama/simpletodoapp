@@ -17,7 +17,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (addTodo) {
+    if (addTodo > "                                     ") {
       const item = { id: new Date().getTime().toString(), addTodo };
       setItems((items) => {
         return [...items, item];
@@ -28,30 +28,25 @@ function App() {
     }
   };
 
-  const styling = {
-    color: "green",
-    textDecoration: "line-through",
-  };
-
   return (
-    <div>
-      <h2>My Todo list</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="container">
+      <h1 style={{ textAlign: "center", color: "darkblue" }}>My Todo list</h1>
+      <form className="form" onSubmit={handleSubmit}>
         <ul>
           {todos.map((todo) => {
             const { id, item } = todo;
             return (
               <div key={id}>
-                <label htmlFor={id}>{item}: </label>
-                <input type="checkbox" name={item} id={id} />
+                <label htmlFor={id}>{item}: </label>{" "}
+                <input type="checkbox" name={item} id={id} />{" "}
                 <button type="button" onClick={() => removeItem(id)}>
                   Remove
                 </button>
+                <hr />
               </div>
             );
           })}
         </ul>
-
         <label htmlFor="add">Place temporary todo item: </label>
         <input
           type="text"
@@ -60,23 +55,26 @@ function App() {
           placeholder="new item"
           value={addTodo}
           onChange={(e) => setAddTodo(e.target.value)}
-        />
-        <button type="submit">Add item</button>
+        />{" "}
+        <button className="addBut" type="submit">
+          Add item
+        </button>
+        <ul>
+          {items.map((item) => {
+            const { id, addTodo } = item;
+            return (
+              <div key={id}>
+                <label htmlFor={id}>{addTodo}: </label>{" "}
+                <input type="checkbox" name={addTodo} id={id} />{" "}
+                <button type="button" onClick={() => removeItems(id)}>
+                  Remove
+                </button>
+                <hr />
+              </div>
+            );
+          })}
+        </ul>{" "}
       </form>
-      <ul>
-        {items.map((item) => {
-          const { id, addTodo } = item;
-          return (
-            <div key={id}>
-              <label htmlFor={id}>{addTodo}: </label>
-              <input type="checkbox" name={addTodo} id={id} />
-              <button type="button" onClick={() => removeItems(id)}>
-                Remove
-              </button>
-            </div>
-          );
-        })}
-      </ul>
     </div>
   );
 }
