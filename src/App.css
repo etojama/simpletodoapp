@@ -1,29 +1,42 @@
 body {
-  background-color: rgb(201, 199, 199);
+  background-color: rgb(112, 111, 111);
 }
 
 .form {
   background-color: rgb(251, 253, 251);
-  width: 700px;
-  margin: 0 auto;
+  width: auto;
+  margin: 0 10px;
   padding-left: 20px;
   padding-right: 50px;
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 5px;
-  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    width: 90%;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0 auto;
+  }
 }
 
 button {
-  background-color: red;
-  color: white;
   border-style: none;
+  color: red;
+  background-color: transparent;
+  border-radius: 4px;
 }
 
 .addBut {
   background-color: blue;
+  color: white;
+  margin: 0 auto;
 }
 button:hover {
   background-color: transparent;
@@ -37,4 +50,19 @@ button:hover {
   color: blue;
   border: 1px solid blue;
   border-radius: 4px;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.lists {
+  text-transform: capitalize;
 }

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { data } from "./data";
+import { MdDeleteForever } from "react-icons/md";
 import "./App.css";
 
 function App() {
   const [todos, setTodos] = useState(data);
   const [addTodo, setAddTodo] = useState("");
-  const [items, setItems] = useState([]);
+  const saveditems = JSON.parse(localStorage.getItem("items"));
+  const [items, setItems] = useState(saveditems || []);
 
   const removeItem = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
@@ -28,19 +30,35 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem("items"));
+    if (items) {
+      setItems(items);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [items]);
+
   return (
     <div className="container">
-      <h1 style={{ textAlign: "center", color: "darkblue" }}>My Todo list</h1>
+      <h1
+        style={{ textAlign: "center", color: "white", fontFamily: "cursive" }}
+      >
+        My Todo List
+      </h1>
       <form className="form" onSubmit={handleSubmit}>
         <ul>
           {todos.map((todo) => {
             const { id, item } = todo;
             return (
               <div key={id}>
+                <div className={"checkbox"}></div>
                 <label htmlFor={id}>{item}: </label>{" "}
                 <input type="checkbox" name={item} id={id} />{" "}
                 <button type="button" onClick={() => removeItem(id)}>
-                  Remove
+                  <MdDeleteForever />
                 </button>
                 <hr />
               </div>
@@ -63,11 +81,11 @@ function App() {
           {items.map((item) => {
             const { id, addTodo } = item;
             return (
-              <div key={id}>
+              <div className="lists" key={id}>
                 <label htmlFor={id}>{addTodo}: </label>{" "}
                 <input type="checkbox" name={addTodo} id={id} />{" "}
                 <button type="button" onClick={() => removeItems(id)}>
-                  Remove
+                  <MdDeleteForever />
                 </button>
                 <hr />
               </div>
@@ -78,5 +96,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
